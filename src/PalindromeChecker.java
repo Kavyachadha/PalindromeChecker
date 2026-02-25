@@ -2,18 +2,24 @@ public class PalindromeChecker {
     public static void main(String[] agrs){
 
         String input = "nitin";
-        String reversed = "";
+        char[] chars = input.toCharArray();
 
-        // Reverse the string
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+        int start = 0;
+        int end = chars.length - 1;
+
+        boolean isPalindrome = true;
+
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
-        if (input.equals(reversed)) {
-            System.out.println("Input text: " + input);
-            System.out.println("It is a Palindrome");
-        } else {
-            System.out.println("Input text: " + input);
-            System.out.println("It is NOT a Palindrome");
-        }
+
+        // Output result
+        System.out.println("Input text: " + input);
+        System.out.println("Is it a Palindrome? : " + isPalindrome);
     }
 }
