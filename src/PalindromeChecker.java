@@ -1,67 +1,25 @@
 public class PalindromeChecker {
 
-    static class Node {
-        char data;
-        Node next;
-
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
-
     public static void main(String[] args) {
 
-        String input = "level";
+        String input = "madam";
 
-        Node head = null;
-        Node tail = null;
-
-        for (char c : input.toCharArray()) {
-            Node newNode = new Node(c);
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-
-        Node slow = head;
-        Node fast = head;
-
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        Node prev = null;
-        Node current = slow;
-        Node nextNode;
-
-        while (current != null) {
-            nextNode = current.next;
-            current.next = prev;
-            prev = current;
-            current = nextNode;
-        }
-
-        Node firstHalf = head;
-        Node secondHalf = prev;
-
-        boolean isPalindrome = true;
-
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data) {
-                isPalindrome = false;
-                break;
-            }
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
+        boolean isPalindrome = check(input, 0, input.length() - 1);
 
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
+    }
+
+    private static boolean check(String s, int start, int end) {
+
+        if (start >= end) {
+            return true;
+        }
+
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        return check(s, start + 1, end - 1);
     }
 }
